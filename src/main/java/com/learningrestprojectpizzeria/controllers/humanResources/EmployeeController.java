@@ -47,8 +47,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/name/{name}")
-    public List<Employee> getAllEmployeesByName (@PathVariable String name) {
-        List<Employee> employees = employeeService.findAllByName(name);
+    public List<Employee> getAllEmployeesByFirstName (@PathVariable String firstName) {
+        List<Employee> employees = employeeService.findAllByFirstName(firstName);
         return employees;
     }
 }

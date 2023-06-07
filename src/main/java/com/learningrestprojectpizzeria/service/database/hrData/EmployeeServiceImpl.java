@@ -45,8 +45,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllByName(String name) {
-        List<Employee> employees = employeeDAO.findAllByName(name);
+    public List<Employee> findAllByFirstName(String firstName) {
+        List<Employee> employees = employeeDAO.findAllByFirstName(firstName);
         return employees;
     }
 }
