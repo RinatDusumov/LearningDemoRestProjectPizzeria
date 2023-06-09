@@ -1,13 +1,15 @@
 package com.learningrestprojectpizzeria.service.database.salesData;
 
 import com.learningrestprojectpizzeria.dao.sales.OrdersDAO;
+import com.learningrestprojectpizzeria.models.hrEntity.Employee;
 import com.learningrestprojectpizzeria.models.salesEntity.Orders;
-import com.learningrestprojectpizzeria.models.salesEntity.WeeklyReports;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
@@ -18,50 +20,42 @@ public class OrdersServiceImpl implements OrdersService {
     @Transactional
     public List<Orders> getAllOrders() {
 
-        return orderDAO.getAllOrders();
+        return orderDAO.findAll();
     }
 
     @Override
     @Transactional
     public void saveOrder(Orders order) {
 
-        orderDAO.saveOrder(order);
+        orderDAO.save(order);
     }
 
     @Override
     @Transactional
-    public List<Orders> getOrdersById(int id) {
-        List<Orders> order = orderDAO.getOrders(id);
-        if (order != null) {
-            return order;
-
-            //TODO если optional пуст можно выбрасывать исключение
+    public Orders getOrdersById(int id) {
+        Orders orders = null;
+        Optional<Orders> optional = orderDAO.findById(id);
+        if(optional.isPresent()) {
+            orders = optional.get();
+            // если optional пуст можно выбрасывать исключение
         }
-        return null;
+        return orders;
     }
 
     @Override
     @Transactional
     public void deleteOrderById(int id) {
-        List<Orders> order = orderDAO.getOrders(id);
-        if (order != null) {
-            orderDAO.deleteOrder(id);
-
+        Optional<Orders> optional = orderDAO.findById(id);
+        if (optional.isPresent()) {
+            orderDAO.deleteById(id);
+        }
             //TODO если optional пуст можно выбрасывать исключение
 
-        }
     }
 
     @Override
     @Transactional
-    public Double getTheFullAmountOfTheOrder(int id) {
-
-        return orderDAO.getTheFullAmountOfTheOrder(id);
-    }
-
-    @Override
-    @Transactional
-    public List<WeeklyReports> gettingDataForReport() {
-        return orderDAO.gettingDataForReport();
+    public List<Orders> findByOrderTimeBetween(Timestamp beginning, Timestamp end) {
+        return orderDAO.findByOrderTimeBetween(beginning, end);
     }
 }

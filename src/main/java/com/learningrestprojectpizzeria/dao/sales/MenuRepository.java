@@ -1,4 +1,4 @@
-package com.learningrestprojectpizzeria.dao.management;
+package com.learningrestprojectpizzeria.dao.sales;
 
 import com.learningrestprojectpizzeria.models.management.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;

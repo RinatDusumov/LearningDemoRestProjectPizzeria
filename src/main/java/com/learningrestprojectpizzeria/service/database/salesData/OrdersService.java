@@ -1,14 +1,16 @@
 package com.learningrestprojectpizzeria.service.database.salesData;
 
 import com.learningrestprojectpizzeria.models.salesEntity.Orders;
-import com.learningrestprojectpizzeria.models.salesEntity.WeeklyReports;
+import org.springframework.data.jpa.repository.Query;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface OrdersService {
     public List<Orders> getAllOrders();
     public void saveOrder (Orders order);
-    public List<Orders> getOrdersById (int id);
+    public Orders getOrdersById (int id);
     public void deleteOrderById (int id);
-    public Double getTheFullAmountOfTheOrder(int id);
-    public List<WeeklyReports> gettingDataForReport();
+    public List<Orders> findByOrderTimeBetween(Timestamp beginning, Timestamp end);
+
 }

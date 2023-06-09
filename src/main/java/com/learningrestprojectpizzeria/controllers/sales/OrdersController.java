@@ -5,9 +5,8 @@ import com.learningrestprojectpizzeria.service.database.salesData.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -22,8 +21,8 @@ public class OrdersController {
     }
 
     @GetMapping("/orders/{id}")
-    public List<Orders> getOrderById(@PathVariable int id) {
-        List<Orders> orders = ordersService.getOrdersById(id);
+    public Orders getOrderById(@PathVariable int id) {
+        Orders orders = ordersService.getOrdersById(id);
         return orders;
     }
 
@@ -45,10 +44,10 @@ public class OrdersController {
         return "Orders with ID = " + id + " was deleted.";
     }
 
-    @GetMapping("/orders/cheque/{id}")
-    public Map<List<Orders>, Double> getFullOrderAmount(@PathVariable int id) {
-        Map<List<Orders>, Double> cheque = new HashMap<>();
-        cheque.put(ordersService.getOrdersById(id), ordersService.getTheFullAmountOfTheOrder(id));
-        return cheque;
+    @GetMapping("/orders/{beginning}-{end}")
+    public List<Orders> findByOrderTimeBetween(@PathVariable Timestamp beginning,
+                                   @PathVariable Timestamp end) {
+        List<Orders> report = findByOrderTimeBetween(beginning, end);
+        return report;
     }
 }

@@ -56,10 +56,9 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests()
                 .requestMatchers("/employee","/employees/*").hasAnyRole("HR", "Human Resources")
                 .requestMatchers(HttpMethod.PUT,"/orders", "/orders/cheque/{id}").hasAnyRole("Cashier", "Bartender")
-                .requestMatchers("/orders", "/orders/*").hasRole("Administrator")
-                .requestMatchers("/weekly_reports", "/weekly_reports/*").hasRole("Accountant")
+                .requestMatchers("/orders", "/orders/*", "/orders/{beginning}-{end}").hasRole("Administrator")
                 .requestMatchers("/expenses","/menus", "/parishes", "/pizzerias",
-                        "/products", "/remains", "suppliers").hasRole("Manager")
+                        "/products", "/remains", "suppliers").hasAnyRole("Manager", "Administrator")
 
                 .anyRequest().authenticated()
                 .and()
