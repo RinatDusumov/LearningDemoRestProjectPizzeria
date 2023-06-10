@@ -1,5 +1,6 @@
-package com.learningrestprojectpizzeria.models.management;
+package com.learningrestprojectpizzeria.modelEntity.management;
 
+import com.learningrestprojectpizzeria.modelEntity.kitchen.Parishes;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

@@ -1,15 +1,17 @@
-package com.learningrestprojectpizzeria.models.management;
+package com.learningrestprojectpizzeria.modelEntity.kitchen;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Entity
-@Table(name = "remained")
+@Table(name = "expenses")
 @Data
 @NoArgsConstructor
-public class Remains {
+public class Expenses {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,10 @@ public class Remains {
     @Column(name = "Quantity")
     private Integer quantity;
 
-    public Remains(Integer quantity) {
+    @Column(name = "OrderTime")
+    private Timestamp orderTime;
+
+    public Expenses(Integer quantity) {
         this.quantity = quantity;
     }
 }

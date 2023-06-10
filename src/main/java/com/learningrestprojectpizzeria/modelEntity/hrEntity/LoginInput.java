@@ -1,4 +1,4 @@
-package com.learningrestprojectpizzeria.models.hrEntity;
+package com.learningrestprojectpizzeria.modelEntity.hrEntity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

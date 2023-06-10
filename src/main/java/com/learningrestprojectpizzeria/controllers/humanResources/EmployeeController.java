@@ -1,7 +1,7 @@
 package com.learningrestprojectpizzeria.controllers.humanResources;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.learningrestprojectpizzeria.models.hrEntity.Employee;
+import com.learningrestprojectpizzeria.modelEntity.hrEntity.Employee;
 import com.learningrestprojectpizzeria.service.database.hrData.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

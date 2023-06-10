@@ -1,6 +1,6 @@
 package com.learningrestprojectpizzeria.dao.hr;
 
-import com.learningrestprojectpizzeria.models.hrEntity.Employee;
+import com.learningrestprojectpizzeria.modelEntity.hrEntity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

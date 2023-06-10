@@ -1,8 +1,8 @@
 package com.learningrestprojectpizzeria.controllers.sales;
 
-import com.learningrestprojectpizzeria.service.database.salesData.GettingASalesReport;
-import com.learningrestprojectpizzeria.models.salesEntity.Orders;
-import com.learningrestprojectpizzeria.service.database.salesData.OrdersService;
+import com.learningrestprojectpizzeria.service.database.salesData.threadGettingASalesReport.GettingASalesReport;
+import com.learningrestprojectpizzeria.modelEntity.salesEntity.Orders;
+import com.learningrestprojectpizzeria.service.database.salesData.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
 @RequestMapping("/api")
 public class OrdersController {
     @Autowired
-    private OrdersService ordersService;
+    private OrderService ordersService;
 
     @GetMapping("/orders")
     public List<Orders> getAllOrders() {

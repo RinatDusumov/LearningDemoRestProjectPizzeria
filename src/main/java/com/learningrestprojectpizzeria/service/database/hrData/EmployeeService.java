@@ -1,6 +1,6 @@
 package com.learningrestprojectpizzeria.service.database.hrData;
 
-import com.learningrestprojectpizzeria.models.hrEntity.Employee;
+import com.learningrestprojectpizzeria.modelEntity.hrEntity.Employee;
 
 import java.util.List;
 

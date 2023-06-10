@@ -1,4 +1,4 @@
-package com.learningrestprojectpizzeria.models.salesEntity;
+package com.learningrestprojectpizzeria.modelEntity.salesEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

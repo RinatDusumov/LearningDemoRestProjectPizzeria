@@ -1,5 +1,7 @@
-package com.learningrestprojectpizzeria.models.management;
+package com.learningrestprojectpizzeria.modelEntity.kitchen;
 
+import com.learningrestprojectpizzeria.modelEntity.kitchen.Expenses;
+import com.learningrestprojectpizzeria.modelEntity.kitchen.Parishes;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -34,20 +36,13 @@ public class Products {
     @Column(name = "PricePerUnit")
     private Double pricePerUnit;
 
-    @OneToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH})
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ProductId")
     private List<Parishes> parishesList;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ProductId")
     private List<Expenses> expensesList;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ProductId")
-    private List<Remains> remainedList;
 
     public Products(String name, String category, String unitMeasurement, Double pricePerUnit) {
         this.name = name;

@@ -1,6 +1,6 @@
 package com.learningrestprojectpizzeria.dao.sales;
 
-import com.learningrestprojectpizzeria.models.salesEntity.OrderDetails;
+import com.learningrestprojectpizzeria.modelEntity.salesEntity.OrderDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.learningrestprojectpizzeria.dao.management;
 
-import com.learningrestprojectpizzeria.models.management.Pizzerias;
+import com.learningrestprojectpizzeria.modelEntity.management.Pizzerias;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

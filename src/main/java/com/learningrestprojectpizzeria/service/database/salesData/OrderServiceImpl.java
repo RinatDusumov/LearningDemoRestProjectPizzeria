@@ -1,8 +1,7 @@
 package com.learningrestprojectpizzeria.service.database.salesData;
 
-import com.learningrestprojectpizzeria.dao.sales.OrdersDAO;
-import com.learningrestprojectpizzeria.models.salesEntity.Orders;
-import jakarta.transaction.Transactional;
+import com.learningrestprojectpizzeria.dao.sales.OrdersRepository;
+import com.learningrestprojectpizzeria.modelEntity.salesEntity.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,26 +10,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrdersServiceImpl implements OrdersService {
+public class OrderServiceImpl implements OrderService {
     @Autowired
-    private OrdersDAO orderDAO;
+    private OrdersRepository orderDAO;
 
     @Override
-    @Transactional
     public List<Orders> getAllOrders() {
 
         return orderDAO.findAll();
     }
 
     @Override
-    @Transactional
     public synchronized void saveOrder(Orders order) {
 
         orderDAO.save(order);
     }
 
     @Override
-    @Transactional
     public Orders getOrdersById(int id) {
         Orders orders = null;
         Optional<Orders> optional = orderDAO.findById(id);
@@ -42,7 +38,6 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    @Transactional
     public synchronized void deleteOrderById(int id) {
         Optional<Orders> optional = orderDAO.findById(id);
         if (optional.isPresent()) {
@@ -53,7 +48,6 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    @Transactional
     public List<Orders> findByOrderTimeBetween(Timestamp startDate, Timestamp endDate) {
         return orderDAO.findByOrderTimeBetween(startDate, endDate);
     }

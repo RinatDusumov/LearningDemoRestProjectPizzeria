@@ -1,6 +1,6 @@
-package com.learningrestprojectpizzeria.models.management;
+package com.learningrestprojectpizzeria.modelEntity.kitchen;
 
-import com.learningrestprojectpizzeria.models.salesEntity.Orders;
+import com.learningrestprojectpizzeria.modelEntity.salesEntity.Orders;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;

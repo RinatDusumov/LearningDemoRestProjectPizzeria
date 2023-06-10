@@ -1,6 +1,6 @@
-package com.learningrestprojectpizzeria.models.management;
+package com.learningrestprojectpizzeria.modelEntity.management;
 
-import com.learningrestprojectpizzeria.models.hrEntity.Employee;
+import com.learningrestprojectpizzeria.modelEntity.hrEntity.Employee;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

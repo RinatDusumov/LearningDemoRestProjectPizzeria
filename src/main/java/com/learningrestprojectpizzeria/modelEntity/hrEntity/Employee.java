@@ -1,6 +1,6 @@
-package com.learningrestprojectpizzeria.models.hrEntity;
+package com.learningrestprojectpizzeria.modelEntity.hrEntity;
 
-import com.learningrestprojectpizzeria.models.salesEntity.OrderDetails;
+import com.learningrestprojectpizzeria.modelEntity.salesEntity.OrderDetails;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

@@ -1,7 +1,7 @@
 package com.learningrestprojectpizzeria.configuration;
 
 import com.learningrestprojectpizzeria.dao.hr.EmployeeRepository;
-import com.learningrestprojectpizzeria.models.hrEntity.Employee;
+import com.learningrestprojectpizzeria.modelEntity.hrEntity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,9 +56,9 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests()
                 .requestMatchers("/employee","/employees/*").hasAnyRole("HR", "Human Resources")
                 .requestMatchers(HttpMethod.PUT,"/orders", "/orders/cheque/{id}").hasAnyRole("Cashier", "Bartender")
-                .requestMatchers("/orders", "/orders/*", "/orders/{beginning}-{end}").hasRole("Administrator")
-                .requestMatchers("/expenses","/menus", "/parishes", "/pizzerias",
-                        "/products", "/remains", "suppliers").hasAnyRole("Manager", "Administrator")
+                .requestMatchers("/orders", "/orders/*").hasRole("Administrator")
+                .requestMatchers("/expenses","/menus","/parishes","/products").hasRole("Chef")
+                .requestMatchers("/pizzerias", "suppliers").hasAnyRole("Manager", "Administrator")
 
                 .anyRequest().authenticated()
                 .and()

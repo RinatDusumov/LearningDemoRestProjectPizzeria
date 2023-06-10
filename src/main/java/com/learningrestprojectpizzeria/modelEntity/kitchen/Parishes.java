@@ -1,11 +1,11 @@
-package com.learningrestprojectpizzeria.models.management;
+package com.learningrestprojectpizzeria.modelEntity.kitchen;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "parishes")
@@ -19,15 +19,13 @@ public class Parishes {
     private Integer id;
 
     @NotBlank
-    @Column(name = "DeliveryDate")
-    private Date deliveryDate;
-
-    @NotBlank
     @Column(name = "Quantity")
     private Integer quantity;
 
-    public Parishes(Date deliveryDate, Integer quantity) {
-        this.deliveryDate = deliveryDate;
+    @Column(name = "OrderTime")
+    private Timestamp orderTime;
+
+    public Parishes(Integer quantity) {
         this.quantity = quantity;
     }
 }

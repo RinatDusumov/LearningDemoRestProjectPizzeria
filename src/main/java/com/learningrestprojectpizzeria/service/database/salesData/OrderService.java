@@ -1,11 +1,11 @@
 package com.learningrestprojectpizzeria.service.database.salesData;
 
-import com.learningrestprojectpizzeria.models.salesEntity.Orders;
+import com.learningrestprojectpizzeria.modelEntity.salesEntity.Orders;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface OrdersService {
+public interface OrderService {
     public List<Orders> getAllOrders();
     public void saveOrder (Orders order);
     public Orders getOrdersById (int id);

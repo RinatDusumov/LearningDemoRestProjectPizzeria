@@ -1,7 +1,7 @@
 package com.learningrestprojectpizzeria.service.database.hrData;
 
 import com.learningrestprojectpizzeria.dao.hr.EmployeeRepository;
-import com.learningrestprojectpizzeria.models.hrEntity.Employee;
+import com.learningrestprojectpizzeria.modelEntity.hrEntity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

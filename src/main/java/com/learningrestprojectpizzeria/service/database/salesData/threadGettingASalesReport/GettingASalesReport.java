@@ -1,11 +1,10 @@
-package com.learningrestprojectpizzeria.service.database.salesData;
+package com.learningrestprojectpizzeria.service.database.salesData.threadGettingASalesReport;
 
-import com.learningrestprojectpizzeria.models.salesEntity.Orders;
-import com.learningrestprojectpizzeria.service.database.salesData.OrdersService;
+import com.learningrestprojectpizzeria.modelEntity.salesEntity.Orders;
+import com.learningrestprojectpizzeria.service.database.salesData.OrderService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -18,7 +17,7 @@ import java.util.concurrent.Callable;
 public class GettingASalesReport implements Callable<List<Orders>> {
 
     @Autowired
-    private OrdersService orderService;
+    private OrderService orderService;
 
     private Timestamp startDate;
     private Timestamp endDate;
