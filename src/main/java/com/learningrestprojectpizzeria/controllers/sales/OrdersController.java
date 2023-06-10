@@ -1,12 +1,18 @@
 package com.learningrestprojectpizzeria.controllers.sales;
 
+import com.learningrestprojectpizzeria.service.database.salesData.GettingASalesReport;
 import com.learningrestprojectpizzeria.models.salesEntity.Orders;
 import com.learningrestprojectpizzeria.service.database.salesData.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @RestController
 @RequestMapping("/api")
@@ -27,27 +33,32 @@ public class OrdersController {
     }
 
     @PostMapping("/orders")
-    public Orders addNewOrder (@RequestBody Orders order) {
+    public Orders addNewOrder(@RequestBody Orders order) {
         ordersService.saveOrder(order);
         return order;
     }
 
     @PutMapping("/orders")
-    public Orders updateOrder (@RequestBody Orders order) {
+    public Orders updateOrder(@RequestBody Orders order) {
         ordersService.saveOrder(order);
         return order;
     }
 
     @DeleteMapping("/orders/{id}")
-    public String deleteOrderById (@PathVariable int id) {
+    public String deleteOrderById(@PathVariable int id) {
         ordersService.deleteOrderById(id);
         return "Orders with ID = " + id + " was deleted.";
     }
 
-    @GetMapping("/orders/{beginning}-{end}")
-    public List<Orders> findByOrderTimeBetween(@PathVariable Timestamp beginning,
-                                   @PathVariable Timestamp end) {
-        List<Orders> report = findByOrderTimeBetween(beginning, end);
-        return report;
+    @GetMapping("/orders/date")
+    public List<Orders> findByOrderTimeBetween(@RequestParam("startDate") Date startDate,
+                                               @RequestParam("endDate") Date endDate) throws ExecutionException, InterruptedException {
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        Future<List<Orders>> future = executorService.submit(new GettingASalesReport((Timestamp) startDate, (Timestamp) endDate));
+        List<Orders> salesReport = future.get();
+
+        executorService.shutdown();
+        return salesReport;
     }
 }

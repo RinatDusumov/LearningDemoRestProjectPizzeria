@@ -1,7 +1,6 @@
 package com.learningrestprojectpizzeria.service.database.salesData;
 
 import com.learningrestprojectpizzeria.dao.sales.OrdersDAO;
-import com.learningrestprojectpizzeria.models.hrEntity.Employee;
 import com.learningrestprojectpizzeria.models.salesEntity.Orders;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     @Transactional
-    public void saveOrder(Orders order) {
+    public synchronized void saveOrder(Orders order) {
 
         orderDAO.save(order);
     }
@@ -44,7 +43,7 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     @Transactional
-    public void deleteOrderById(int id) {
+    public synchronized void deleteOrderById(int id) {
         Optional<Orders> optional = orderDAO.findById(id);
         if (optional.isPresent()) {
             orderDAO.deleteById(id);
@@ -55,7 +54,7 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     @Transactional
-    public List<Orders> findByOrderTimeBetween(Timestamp beginning, Timestamp end) {
-        return orderDAO.findByOrderTimeBetween(beginning, end);
+    public List<Orders> findByOrderTimeBetween(Timestamp startDate, Timestamp endDate) {
+        return orderDAO.findByOrderTimeBetween(startDate, endDate);
     }
 }
