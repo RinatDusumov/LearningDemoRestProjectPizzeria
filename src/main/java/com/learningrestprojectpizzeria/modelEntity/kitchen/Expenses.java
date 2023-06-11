@@ -1,6 +1,7 @@
 package com.learningrestprojectpizzeria.modelEntity.kitchen;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Expenses {
     private Integer id;
 
     @NotBlank
+    @Min(value = 1)
     @Column(name = "Quantity")
     private Integer quantity;
 

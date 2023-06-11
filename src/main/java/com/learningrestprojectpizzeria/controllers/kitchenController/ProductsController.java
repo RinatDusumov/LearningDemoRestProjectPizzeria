@@ -43,9 +43,9 @@ public class ProductsController {
         return "Products with ID = " + id + " was deleted.";
     }
 
-    @GetMapping("/products/balance/{id}")
-    public List<Products> getProductBalance(@PathVariable int id) {
-        List<Products> productBalance = productsService.getProductBalance(id);
+    @GetMapping("/products/name/{name}")
+    public Products getProductBalance(@PathVariable String name) {
+        Products productBalance = productsService.getProductBalance(name);
         return productBalance;
     }
 }

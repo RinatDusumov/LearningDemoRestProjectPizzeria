@@ -42,7 +42,8 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    public List<Products> getProductBalance(int id) {
-        return null;
+    public Products getProductBalance(String name) {
+
+        return productsRepository.getProductsByName(name);
     }
 }

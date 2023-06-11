@@ -9,5 +9,5 @@ public interface ProductService {
     public void save(Products products);
     public Products getProductsById(int id);
     public void deleteProductsById(int id);
-    public List<Products> getProductBalance(int id);
+    public Products getProductBalance(String name);
 }
