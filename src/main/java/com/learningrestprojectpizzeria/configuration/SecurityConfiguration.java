@@ -57,7 +57,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/employee","/employees/*").hasAnyRole("HR", "Human Resources")
                 .requestMatchers(HttpMethod.PUT,"/orders", "/orders/cheque/{id}").hasAnyRole("Cashier", "Bartender")
                 .requestMatchers("/orders", "/orders/*").hasRole("Administrator")
-                .requestMatchers("/expenses","/menus","/parishes","/products").hasRole("Chef")
+                .requestMatchers("/expenses", "/expenses/*","/menus", "/menus/*","/parishes", "/parishes/*","/products", "/products/*").hasRole("Chef")
                 .requestMatchers("/pizzerias", "suppliers").hasAnyRole("Manager", "Administrator")
 
                 .anyRequest().authenticated()
