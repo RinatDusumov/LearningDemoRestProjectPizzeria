@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface ProductsRepository extends JpaRepository<Products, Integer> {
     @Query(value = "select Products.name, Products.category, Products.unitMeasurement, " +
             "sum(Parishes.quantity + Expenses.quantity)) as Remains" +
-            "from Products where Products.name = :name",
+            "from Products where Products.name = :name " +
+            "group by Products.name",
             nativeQuery = true)
     public Products getProductsByName(@Param("name") String name);
 }
