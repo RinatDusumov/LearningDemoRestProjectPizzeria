@@ -15,6 +15,4 @@ public interface OrderService {
 
     public List<ReportOrders> getReportOrdersTimeBetween(Timestamp date);
 
-    public List<Orders> findAllOrdersByIsItCooked(Boolean isItCooked);
-
 }

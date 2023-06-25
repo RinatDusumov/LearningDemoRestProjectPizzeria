@@ -25,11 +25,6 @@ public class Order {
         return orderService.getReportOrdersTimeBetween(date);
     }
 
-    @GetMapping("/manage/orders/is_it_cooked/{isItCooked}")
-    public List<Orders> findAllOrdersByIsItCooked(@PathVariable Boolean isItCooked) {
-        return orderService.findAllOrdersByIsItCooked(isItCooked);
-    }
-
     @GetMapping("manage/orders")
     public List<Orders> getAllOrders() {
         List<Orders> allOrders = orderService.getAllOrders();

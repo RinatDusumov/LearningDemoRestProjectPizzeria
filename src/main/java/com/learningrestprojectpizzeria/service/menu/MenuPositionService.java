@@ -10,6 +10,4 @@ public interface MenuPositionService {
     public void savePosition (MenuPositions position);
     public MenuPositions getPositionById (int id);
     public void deletePositionById (int id);
-
-    public ProductAccounting getRemainingProductsByName(String nameProduct);
 }

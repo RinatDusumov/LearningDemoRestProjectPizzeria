@@ -14,12 +14,6 @@ public class MenuPosition {
     @Autowired
     private MenuPositionService menuPositionService;
 
-    @GetMapping("/manage/remaining_products/nameProduct/{name}")
-    public ProductAccounting getRemainingProductsByName (@PathVariable String nameProduct) {
-
-        return menuPositionService.getRemainingProductsByName(nameProduct);
-    }
-
     @GetMapping("/manage/menu_positions")
     public List<MenuPositions> getAllPositions() {
         List<MenuPositions> allPositions = menuPositionService.getAllPositions();

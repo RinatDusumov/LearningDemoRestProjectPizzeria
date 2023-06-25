@@ -15,13 +15,6 @@ public class MenuPositionServiceImpl implements MenuPositionService {
     @Autowired
     private MenuPositionDAO menuPositionRepository;
 
-    @Autowired
-    private ProductService productService;
-
-    public ProductAccounting getRemainingProductsByName(String nameProduct) {
-        return productService.findProductsEntitiesByName(nameProduct);
-    }
-
     @Override
     public List<MenuPositions> getAllPositions() {
 

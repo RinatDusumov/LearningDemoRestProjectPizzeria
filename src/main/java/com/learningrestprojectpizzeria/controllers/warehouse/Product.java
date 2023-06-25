@@ -1,5 +1,6 @@
 package com.learningrestprojectpizzeria.controllers.warehouse;
 
+import com.learningrestprojectpizzeria.model.dto.ProductAccounting;
 import com.learningrestprojectpizzeria.model.entity.Products;
 import com.learningrestprojectpizzeria.service.warehouse.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,12 @@ public class Product {
 
     @Autowired
     private ProductService productService;
+
+    @GetMapping("/manage/remaining_products/nameProduct/{name}")
+    public ProductAccounting getRemainingProductsByName (@PathVariable String nameProduct) {
+
+        return productService.findProductsEntitiesByName(nameProduct);
+    }
 
     @GetMapping("/manage/products")
     public List<Products> getAllProducts() {

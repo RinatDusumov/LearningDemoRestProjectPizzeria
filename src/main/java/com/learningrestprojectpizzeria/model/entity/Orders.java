@@ -22,21 +22,17 @@ public class Orders {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private List<MenuPositions> positionMenu;
+    private List<MenuPositions> menuPosition;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     @JoinColumn(name = "orders_id")
     private List<OrderDetailsEntity> orderDetails;
 
-    @Column(name = "is_it_cooked")
-    private Boolean isItCooked;
-
     @Column(name = "order_time")
     private Timestamp orderTime;
 
-    public Orders(Integer quantity, Boolean isItCooked) {
+    public Orders(Integer quantity) {
         this.quantity = quantity;
-        this.isItCooked = isItCooked;
     }
 }

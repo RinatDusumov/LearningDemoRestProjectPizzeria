@@ -26,11 +26,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Orders> findAllOrdersByIsItCooked(Boolean isItCooked) {
-        return orderRepository.findOrderEntityByIsItCooked(isItCooked);
-    }
-
-    @Override
     public List<Orders> getAllOrders() {
 
         return orderRepository.findAll();
