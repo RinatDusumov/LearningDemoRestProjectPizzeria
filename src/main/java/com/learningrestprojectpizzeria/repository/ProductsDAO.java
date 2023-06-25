@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductsDAO extends JpaRepository<Products, Integer> {
-    @Query(value = "select ProductsEntity.name, " +
-            "ProductsEntity.category, " +
-            "ProductsEntity.unitMeasurement, " +
-            "sum(ParishesEntity.numberOfArrivals + ExpensesEntity.consumptionQuantity)) as Remains" +
-            "from ProductsEntity where ProductsEntity.name = :name " +
-            "group by ProductsEntity.name",
+    @Query(value = "select Products.name, " +
+            "Products.category, " +
+            "Products.unitMeasurement, " +
+            "sum(Parishes.numberOfArrivals + Expenses.consumptionQuantity)) as Remains" +
+            "from Products " +
+            "where Products.name = :name " +
+            "group by Products.name",
             nativeQuery = true)
     public ProductAccounting findProductsEntitiesByName(@Param("name") String nameProduct);
 
