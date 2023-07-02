@@ -2,7 +2,7 @@ package com.learningrestprojectpizzeria.controllers.adminPanel.accounts;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.learningrestprojectpizzeria.model.entity.Employees;
-import com.learningrestprojectpizzeria.service.statistics.accounts.EmployeeService;
+import com.learningrestprojectpizzeria.service.database.accounts.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +13,10 @@ import java.util.List;
 public class Employee {
     @Autowired
     private EmployeeService employeeService;
+
+
+
+
 
     @GetMapping("/manage/employees")
     public List<Employees> getAllEmployees() {

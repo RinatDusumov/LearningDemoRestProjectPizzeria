@@ -1,7 +1,7 @@
 package com.learningrestprojectpizzeria.controllers.adminPanel;
 
 import com.learningrestprojectpizzeria.model.entity.Pizzerias;
-import com.learningrestprojectpizzeria.service.statistics.PizzeriaService;
+import com.learningrestprojectpizzeria.service.database.PizzeriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

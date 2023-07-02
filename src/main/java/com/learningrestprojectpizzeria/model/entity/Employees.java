@@ -56,6 +56,10 @@ public class Employees {
     @JoinColumn(name = "login_id")
     private Logins login;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
+    private List<Orders> allOrders;
+
     @Column(name = "date_of_employment")
     private Timestamp dateOfEmployment;
 

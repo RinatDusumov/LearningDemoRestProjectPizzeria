@@ -1,10 +1,10 @@
 package com.learningrestprojectpizzeria.service.database.accounts;
 
-import com.learningrestprojectpizzeria.model.dto.reporting.Customer;
+import com.learningrestprojectpizzeria.model.dto.Customer;
 import com.learningrestprojectpizzeria.model.entity.Clients;
-import com.learningrestprojectpizzeria.model.entity.MenuPositions;
 import com.learningrestprojectpizzeria.model.entity.Orders;
 import com.learningrestprojectpizzeria.repository.ClientDAO;
+import com.learningrestprojectpizzeria.service.database.sales.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,61 +15,44 @@ import java.util.Optional;
 @Service
 public class ClientServiceImpl implements ClientService {
     @Autowired
-    private ClientDAO clientRepository;
+    private ClientDAO clientDAO;
+
+    @Autowired
+    private OrderService orderService;
 
     private final List<Customer> allCustomer = new LinkedList<>();
 
-    private String fullNameCustomer = null;
-    private String phoneNumber = null;
-    private double income = 0;
-    private int totalQuanity = 0;
 
 
     @Override
-    public List<Customer> findClientByFullName(String fullName) {
-        List<Clients> allClients = getAllClients();
-        for(Clients client : allClients) {
-            fullNameCustomer = client.getFirstName().concat(client.getSurname());
-            phoneNumber = client.getPhoneNumber();
+    public List<Customer> getAReportOnAllClients() {
+        for(Clients client : getAllClients()) {
+            double income = 0;
             for (Orders order : client.getAllOrders()) {
-                income = incomeCalculation(income, order.getQuantity(), order.getMenuPosition());
-                totalQuanity = countingTheTotal(totalQuanity, order.getQuantity());
+                income += orderService.receivingPaymentData(order).getTotalAmount();
             }
+            allCustomer.add(new Customer(client.getFirstName().concat(client.getSurname()),
+                    client.getPhoneNumber(), income));
         }
-        double averageCheck = calculationOfTheAverageCheck(income, totalQuanity);
-        allCustomer.add(new Customer(fullNameCustomer, phoneNumber , income, averageCheck));
+
         return allCustomer;
     }
 
-    public double incomeCalculation(double income, Integer quantity, List<MenuPositions> positions) {
-        for(MenuPositions position : positions) {
-            income = position.getPrice() * quantity;
-        }
-        return income;
-    }
-    
-    public double calculationOfTheAverageCheck(double income, int totalQuantity) {
-        return income / (double) totalQuantity;
-    }
-
-    public int countingTheTotal(int totalQuantity, int quantity) {
-        return totalQuantity += quantity;
-    }
     
     @Override
     public List<Clients> getAllClients() {
-        return clientRepository.findAll();
+        return clientDAO.findAll();
     }
 
     @Override
     public void saveClient(Clients client) {
-        clientRepository.save(client);
+        clientDAO.save(client);
     }
 
     @Override
     public Clients getClientById(int id) {
         Clients client = null;
-        Optional<Clients> optional = clientRepository.findById(id);
+        Optional<Clients> optional = clientDAO.findById(id);
         if(optional.isPresent()) {
             client = optional.get();
         }
@@ -78,9 +61,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteClientById(int id) {
-        Optional<Clients> optional = clientRepository.findById(id);
+        Optional<Clients> optional = clientDAO.findById(id);
         if(optional.isPresent()) {
-            clientRepository.deleteById(id);
+            clientDAO.deleteById(id);
         }
 
     }

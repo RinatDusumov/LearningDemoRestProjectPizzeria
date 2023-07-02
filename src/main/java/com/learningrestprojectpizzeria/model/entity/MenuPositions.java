@@ -37,6 +37,11 @@ public class MenuPositions {
     @Column(name = "price")
     private Double price;
 
+    @OneToMany(mappedBy = "menuPositions",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<OrderDetailsEntity> orderDetails;
+
     @OneToMany(cascade = {CascadeType.DETACH,
                           CascadeType.MERGE,
                           CascadeType.PERSIST,

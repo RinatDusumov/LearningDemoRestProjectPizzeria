@@ -1,6 +1,8 @@
 package com.learningrestprojectpizzeria.configuration;
 
+import com.learningrestprojectpizzeria.model.entity.Clients;
 import com.learningrestprojectpizzeria.model.entity.Employees;
+import com.learningrestprojectpizzeria.repository.ClientDAO;
 import com.learningrestprojectpizzeria.repository.EmployeeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,22 +23,34 @@ import java.util.List;
 @EnableWebSecurity
 public class Security {
     @Autowired
-    private EmployeeDAO employeeRepository;
+    private EmployeeDAO employeeDAO;
+    @Autowired
+    private ClientDAO clientDAO;
     
     @Bean
     public UserDetailsService userDetailsService () {
-        List<Employees> allEmployees = employeeRepository.findAll();
+        List<Employees> allEmployees = employeeDAO.findAll();
+        List<Clients> allClients = clientDAO.findAll();
 
         List<UserDetails> users = new ArrayList<>();
         
         for (Employees employee : allEmployees) {
             UserDetails userDetails = User
-                    .withUsername(employee.getLogin().getEmail())
+                    .withUsername(employee.getFirstName())
                     .password(employee.getLogin().getPassword())
                     .roles(employee.getDepartment())
                     .build();
             users.add(userDetails);
         }
+        for (Clients client : allClients) {
+            UserDetails userDetails = User
+                    .withUsername(client.getFirstName())
+                    .password(client.getLogin().getPassword())
+                    .roles((Roles.CLIENT.toString()))
+                    .build();
+            users.add(userDetails);
+        }
+
 
 //        UserDetails userAdmin = User
 //                .withUsername("Rinat")
@@ -53,16 +67,17 @@ public class Security {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .requestMatchers("/employee","/employees/*").hasAnyRole("HR", "Human Resources")
-                .requestMatchers(HttpMethod.PUT,"/orders", "/orders/cheque/{id}").hasAnyRole("Cashier", "Bartender")
-                .requestMatchers("/orders", "/orders/*").hasRole("Administrator")
-                .requestMatchers("/expenses", "/expenses/*","/menus", "/menus/*","/parishes", "/parishes/*","/products", "/products/*").hasRole("Chef")
-                .requestMatchers("/pizzerias", "/pizzerias/*", "/suppliers", "/suppliers/*").hasAnyRole("Manager", "Administrator")
+//        http.authorizeHttpRequests()
+//                .requestMatchers("/employee","/employees/*").hasAnyRole("HR", "Human Resources")
+//                .requestMatchers(HttpMethod.PUT,"/orders", "/orders/cheque/{id}").hasAnyRole("Cashier", "Bartender")
+//                .requestMatchers("/orders", "/orders/*").hasRole("Administrator")
+//                .requestMatchers("/expenses", "/expenses/*","/menus", "/menus/*","/parishes", "/parishes/*","/products", "/products/*").hasRole("Chef")
+//                .requestMatchers("/pizzerias", "/pizzerias/*", "/suppliers", "/suppliers/*").hasAnyRole("Manager", "Administrator")
+//
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin();
 
-                .anyRequest().authenticated()
-                .and()
-                .formLogin();
 //                .successForwardUrl("куда перебросит после аутентификации");
 
 //        .requestMatchers("", "").authenticated()

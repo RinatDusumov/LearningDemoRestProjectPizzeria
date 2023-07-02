@@ -1,6 +1,6 @@
 package com.learningrestprojectpizzeria.controllers.warehouse;
 
-import com.learningrestprojectpizzeria.service.warehouse.DeliveriesService;
+import com.learningrestprojectpizzeria.service.database.warehouse.DeliveriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

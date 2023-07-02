@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "clients")
 @Data
@@ -44,6 +46,10 @@ public class Clients {
             fetch = FetchType.LAZY)
     @JoinColumn(name = "login_id")
     private Logins login;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
+    private List<Orders> allOrders;
 
     public Clients(String firstName, String surname, String
             phoneNumber, Integer age, String city, String country) {

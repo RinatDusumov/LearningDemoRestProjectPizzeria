@@ -6,6 +6,7 @@ import com.learningrestprojectpizzeria.model.entity.MenuPositions;
 import java.util.List;
 
 public interface MenuPositionService {
+
     public List<MenuPositions> getAllPositions();
     public void savePosition (MenuPositions position);
     public MenuPositions getPositionById (int id);

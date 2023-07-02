@@ -13,6 +13,7 @@ public class MenuPositionServiceImpl implements MenuPositionService {
     @Autowired
     private MenuPositionDAO menuPositionRepository;
 
+
     @Override
     public List<MenuPositions> getAllPositions() {
 

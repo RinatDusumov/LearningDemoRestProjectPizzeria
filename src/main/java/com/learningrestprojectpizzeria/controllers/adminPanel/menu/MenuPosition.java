@@ -1,8 +1,7 @@
 package com.learningrestprojectpizzeria.controllers.adminPanel.menu;
 
-import com.learningrestprojectpizzeria.model.dto.ProductAccounting;
 import com.learningrestprojectpizzeria.model.entity.MenuPositions;
-import com.learningrestprojectpizzeria.service.menu.MenuPositionService;
+import com.learningrestprojectpizzeria.service.database.menu.MenuPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -2,9 +2,11 @@ package com.learningrestprojectpizzeria.service.database.accounts;
 
 import com.learningrestprojectpizzeria.model.entity.Employees;
 import com.learningrestprojectpizzeria.repository.EmployeeDAO;
+import com.learningrestprojectpizzeria.service.utility.calculations.Calculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employees getEmployeeById(int id) {
         Employees employee = null;
         Optional<Employees> optional = employeeDAO.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             employee = optional.get();
             // если optional пуст можно выбрасывать исключение
         }

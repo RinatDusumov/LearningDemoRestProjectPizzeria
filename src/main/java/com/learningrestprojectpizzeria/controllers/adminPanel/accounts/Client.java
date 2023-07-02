@@ -1,8 +1,9 @@
-package com.learningrestprojectpizzeria.controllers.statistics;
+package com.learningrestprojectpizzeria.controllers.adminPanel.accounts;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.learningrestprojectpizzeria.model.dto.Customer;
 import com.learningrestprojectpizzeria.model.entity.Clients;
-import com.learningrestprojectpizzeria.service.statistics.accounts.ClientService;
+import com.learningrestprojectpizzeria.service.database.accounts.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,13 @@ public class Client {
     @Autowired
     private ClientService clientService;
 
+    @GetMapping("/manage/report_for_all_clients")
+    public List<Customer> getAReportOnAllClients() {
+        return clientService.getAReportOnAllClients();
+    }
+
+
+
     @GetMapping("/manage/clients")
     public List<Clients> getAllClients() {
 
@@ -21,12 +29,12 @@ public class Client {
     }
 
     @GetMapping("/manage/client/{id}")
-    public Clients getClient(@PathVariable int id) {
+    public Clients getClientById(@PathVariable int id) {
 
         return clientService.getClientById(id);
     }
 
-    @PostMapping("/manage/clients")
+    @PostMapping("/clients")
     public Clients addNewClient (@RequestBody Clients client) {
         client.getLogin().setPassword("{bcrypt}" + BCrypt.withDefaults().hashToString(12,
                 client.getLogin().getPassword().toCharArray()));
@@ -34,13 +42,13 @@ public class Client {
         return client;
     }
 
-    @PutMapping("/manage/clients")
+    @PutMapping("/clients")
     public Clients updateClient (@RequestBody Clients client) {
         clientService.saveClient(client);
         return client;
     }
 
-    @DeleteMapping("/manage/clients/{id}")
+    @DeleteMapping("/clients/{id}")
     public String deleteClient (@PathVariable int id) {
         clientService.deleteClientById(id);
         return "ClientService with ID = " + id + " was deleted.";

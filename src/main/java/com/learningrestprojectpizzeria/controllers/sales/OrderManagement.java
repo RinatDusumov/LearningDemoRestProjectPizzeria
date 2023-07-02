@@ -1,6 +1,7 @@
 package com.learningrestprojectpizzeria.controllers.sales;
 
 import com.learningrestprojectpizzeria.model.dto.ProductReceipt;
+import com.learningrestprojectpizzeria.model.entity.Orders;
 import com.learningrestprojectpizzeria.service.database.sales.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ public class OrderManagement {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/manage/orders/date/{date}")
+    @GetMapping("/manage/orders/date/{date-date}")
     public List<ProductReceipt> findOrdersByOrderTimeBetween(Timestamp startDate, Timestamp endDate) {
         return orderService.findOrdersByOrderTimeBetween(startDate, endDate);
     }
@@ -26,26 +27,26 @@ public class OrderManagement {
     }
 
     @GetMapping("manage/orders")
-    public List<com.learningrestprojectpizzeria.model.entity.Orders> getAllOrders() {
-        List<com.learningrestprojectpizzeria.model.entity.Orders> allOrders = orderService.getAllOrders();
+    public List<Orders> getAllOrders() {
+        List<Orders> allOrders = orderService.getAllOrders();
         return allOrders;
     }
 
     @GetMapping("/manage/orders/{id}")
-    public com.learningrestprojectpizzeria.model.entity.Orders getOrderById(@PathVariable int id) {
-        com.learningrestprojectpizzeria.model.entity.Orders orders = orderService.getOrdersById(id);
+    public Orders getOrderById(@PathVariable int id) {
+        Orders orders = orderService.getOrdersById(id);
         return orders;
     }
 
     @PostMapping("/orders")
-    public com.learningrestprojectpizzeria.model.entity.Orders addNewOrder(@RequestBody com.learningrestprojectpizzeria.model.entity.Orders order, Model model) {
-        com.learningrestprojectpizzeria.model.entity.Orders completedOrder = orderService.saveOrder(order);
+    public Orders addNewOrder(@RequestBody Orders order, Model model) {
+        Orders completedOrder = orderService.saveOrder(order);
         model.addAttribute("completedOrder", completedOrder);
         return order;
     }
 
     @GetMapping("/orders/check")
-    public ProductReceipt receivingPaymentData(@ModelAttribute("completedOrder") com.learningrestprojectpizzeria.model.entity.Orders order, Model model) {
+    public ProductReceipt receivingPaymentData(@ModelAttribute("completedOrder") Orders order, Model model) {
         ProductReceipt paymentData = orderService.receivingPaymentData(order);
         model.addAttribute("paymentConfirmation", paymentData);
         return paymentData;
@@ -57,7 +58,7 @@ public class OrderManagement {
     }
 
     @PutMapping("/orders")
-    public com.learningrestprojectpizzeria.model.entity.Orders updateOrder(@RequestBody com.learningrestprojectpizzeria.model.entity.Orders order) {
+    public Orders updateOrder(@RequestBody Orders order) {
         orderService.saveOrder(order);
         return order;
     }

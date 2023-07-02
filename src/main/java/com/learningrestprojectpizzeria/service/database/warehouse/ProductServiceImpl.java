@@ -1,6 +1,7 @@
 package com.learningrestprojectpizzeria.service.database.warehouse;
 
 import com.learningrestprojectpizzeria.model.dto.ProductAccounting;
+import com.learningrestprojectpizzeria.model.entity.Expenses;
 import com.learningrestprojectpizzeria.model.entity.Products;
 import com.learningrestprojectpizzeria.repository.ProductsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProduct(Products product) {
+        for (Expenses expenses : product.getExpenses()) {
+            if (expenses.getConsumptionQuantity() > 0) {
+                expenses.setConsumptionQuantity(Math.negateExact(expenses.getConsumptionQuantity()));
+            }
+        }
         productsDAO.save(product);
     }
 

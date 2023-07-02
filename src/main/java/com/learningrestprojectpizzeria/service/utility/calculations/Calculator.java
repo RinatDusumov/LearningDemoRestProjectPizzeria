@@ -1,5 +1,6 @@
 package com.learningrestprojectpizzeria.service.utility.calculations;
 
+import com.learningrestprojectpizzeria.model.dto.PaidMeals;
 import com.learningrestprojectpizzeria.model.entity.MenuPositions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -8,18 +9,16 @@ import java.util.List;
 
 @Component
 public class Calculator {
-    public double incomeCalculation(double income, Integer quantity, List<MenuPositions> positions) {
-        for(MenuPositions position : positions) {
-            income = position.getPrice() * quantity;
+
+    public static Double calculationOfTheTotalAmount(List<PaidMeals> paidMeals) {
+        Double totalAmount = 0.0;
+        for (PaidMeals paid : paidMeals) {
+            totalAmount += paid.getTheAmount();
         }
-        return income;
+        return totalAmount;
     }
 
-    public double calculationOfTheAverageCheck(double income, int totalQuantity) {
+    public static double calculationOfTheAverageCheck(double income, int totalQuantity) {
         return income / (double) totalQuantity;
-    }
-
-    public int countingTheTotal(int totalQuantity, int quantity) {
-        return totalQuantity += quantity;
     }
 }
