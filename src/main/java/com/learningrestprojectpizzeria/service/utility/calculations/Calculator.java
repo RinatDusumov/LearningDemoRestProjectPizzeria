@@ -17,8 +17,4 @@ public class Calculator {
         }
         return totalAmount;
     }
-
-    public static double calculationOfTheAverageCheck(double income, int totalQuantity) {
-        return income / (double) totalQuantity;
-    }
 }

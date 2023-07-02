@@ -1,5 +1,8 @@
 package com.learningrestprojectpizzeria.configuration;
 
 public enum Roles {
-    CLIENT;
+    CLIENT,
+    MANAGER,
+    CHEF,
+    CASHIER;
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface OrderDAO extends JpaRepository<Orders, Integer> {
     public List<Orders> findOrdersByOrderTimeBetween(Timestamp startDate, Timestamp endDate);
-
-
     public List<Orders> findOrdersByOrderTime(Timestamp date);
+    public List<Orders> findOrdersByItCookedIsFalse();
 }

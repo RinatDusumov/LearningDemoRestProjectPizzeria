@@ -17,4 +17,5 @@ public interface OrderService {
     public ProductReceipt receivingPaymentData (Orders order);
 
     public String paymentConfirmation (ProductReceipt productReceipt);
+    public List<Orders> findOrdersByItCookedIsFalse();
 }

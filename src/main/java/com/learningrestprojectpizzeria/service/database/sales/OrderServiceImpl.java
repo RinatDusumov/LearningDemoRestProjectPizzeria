@@ -18,6 +18,12 @@ public class OrderServiceImpl implements OrderService {
     private OrderDAO orderRepository;
 
     @Override
+    public List<Orders> findOrdersByItCookedIsFalse() {
+        return orderRepository.findOrdersByItCookedIsFalse();
+
+    }
+
+    @Override
     public String paymentConfirmation (ProductReceipt productReceipt) {
         return "Successfully paid";
     }
@@ -26,10 +32,12 @@ public class OrderServiceImpl implements OrderService {
     public ProductReceipt receivingPaymentData(Orders order) {
         List<PaidMeals> paidMeals = new LinkedList<>();
         for (OrderDetailsEntity orderDetails : order.getOrderDetails()) {
-            paidMeals.add(new PaidMeals(orderDetails.getMenuPositions().getDishName(),
+            paidMeals.add(new PaidMeals (
+                    orderDetails.getMenuPositions().getDishName(),
                     orderDetails.getMenuPositions().getPrice(),
                     orderDetails.getQuantity(),
-                    orderDetails.getMenuPositions().getPrice() * orderDetails.getQuantity()));
+                    orderDetails.getMenuPositions().getPrice() * orderDetails.getQuantity()
+            ));
         }
 
         return new ProductReceipt(paidMeals, Calculator.calculationOfTheTotalAmount(paidMeals));

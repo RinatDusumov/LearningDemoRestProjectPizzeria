@@ -38,6 +38,10 @@ public class Products {
     @Column(name = "price_per_unit")
     private Double pricePerUnit;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "menu_position_id")
+    private MenuPositions menuPositions;
+
     @OneToMany(cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,

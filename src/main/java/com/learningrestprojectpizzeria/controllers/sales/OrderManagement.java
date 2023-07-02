@@ -3,6 +3,7 @@ package com.learningrestprojectpizzeria.controllers.sales;
 import com.learningrestprojectpizzeria.model.dto.ProductReceipt;
 import com.learningrestprojectpizzeria.model.entity.Orders;
 import com.learningrestprojectpizzeria.service.database.sales.OrderService;
+import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,19 @@ public class OrderManagement {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/manage/orders/date/{date-date}")
+    @GetMapping("/manage/kitchen/not_ready_orders")
+    public List<Orders> findOrdersByItCookedIsFalse() {
+        return orderService.findOrdersByItCookedIsFalse();
+    }
+
+    @PutMapping("/manage/kitchen/ready_order")
+    public Orders confirmationOfTheReadinessOfTheDish (@RequestBody Orders order) {
+        order.setItCooked(true);
+        orderService.saveOrder(order);
+        return order;
+    }
+
+    @GetMapping("/manage/orders/date/{date}-{date}")
     public List<ProductReceipt> findOrdersByOrderTimeBetween(Timestamp startDate, Timestamp endDate) {
         return orderService.findOrdersByOrderTimeBetween(startDate, endDate);
     }

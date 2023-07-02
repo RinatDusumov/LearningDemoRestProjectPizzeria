@@ -42,12 +42,12 @@ public class MenuPositions {
             fetch = FetchType.LAZY)
     private List<OrderDetailsEntity> orderDetails;
 
-    @OneToMany(cascade = {CascadeType.DETACH,
+    @OneToMany(mappedBy = "menuPositions",
+            cascade = {CascadeType.DETACH,
                           CascadeType.MERGE,
                           CascadeType.PERSIST,
                           CascadeType.PERSIST},
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_position_id")
     private List<Products> products;
 
     public MenuPositions(String category, String dishName, String servingType, Double price) {

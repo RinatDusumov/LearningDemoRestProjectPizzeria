@@ -16,6 +16,9 @@ public class Orders {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "it_cooked")
+    private boolean itCooked;
+
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
