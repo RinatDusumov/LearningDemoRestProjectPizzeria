@@ -16,13 +16,6 @@ public class Orders {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private List<MenuPositions> menuPosition;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
@@ -31,8 +24,4 @@ public class Orders {
 
     @Column(name = "order_time")
     private Timestamp orderTime;
-
-    public Orders(Integer quantity) {
-        this.quantity = quantity;
-    }
 }

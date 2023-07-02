@@ -1,8 +1,7 @@
 package com.learningrestprojectpizzeria.controllers.warehouse;
 
-import com.learningrestprojectpizzeria.model.dto.ProductAccounting;
 import com.learningrestprojectpizzeria.model.entity.Products;
-import com.learningrestprojectpizzeria.service.warehouse.ProductService;
+import com.learningrestprojectpizzeria.service.database.warehouse.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ public class Product {
     private ProductService productService;
 
     @GetMapping("/manage/remaining_products/nameProduct/{name}")
-    public ProductAccounting getRemainingProductsByName (@PathVariable String nameProduct) {
+    public com.learningrestprojectpizzeria.model.dto.ProductAccounting getRemainingProductsByName (@PathVariable String nameProduct) {
 
         return productService.findProductsEntitiesByName(nameProduct);
     }
